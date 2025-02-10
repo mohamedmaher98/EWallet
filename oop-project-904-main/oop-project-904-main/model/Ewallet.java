@@ -10,8 +10,20 @@ public class Ewallet {
 
     private String name = "EraaSoft Cash";
 
+    private static Ewallet instance;
+
     private List<Account> accounts = new ArrayList<>();
 
+    private Ewallet() {
+
+    }
+
+    public static Ewallet getInstance() {
+        if (instance == null)
+            return instance = new Ewallet();
+        else
+            return instance;
+    }
 
     public String getName() {
         return name;

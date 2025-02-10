@@ -50,12 +50,12 @@ public class ApplicationServiceImpl implements ApplicationService {
         ValidationService validationService = new ValidationServiceImpl();
 
         // 2.TODO Validation on UserName and Password
-        if (validationService.validateUserName(name)) { // "eslam"
+        if (!validationService.validateUserName(name)) { // "eslam"
             System.out.println("Invalid UserName");
             return;
         }
 
-        if (validationService.validatePassword(password)) {
+        if (!validationService.validatePassword(password)) {
             System.out.println("Invalid Password");
             return;
         }
