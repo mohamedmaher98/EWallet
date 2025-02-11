@@ -14,7 +14,7 @@ public class Account {
         this.userName = userName;
         this.password = password;
         this.balance = 0;
-        this.active = true;
+        this.active = false;
     }
 
     public String getUserName() {

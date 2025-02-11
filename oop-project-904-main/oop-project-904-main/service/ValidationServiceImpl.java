@@ -1,5 +1,7 @@
 package main.project.service;
 
+import main.project.model.Account;
+
 public class ValidationServiceImpl implements ValidationService {
 
     @Override
@@ -13,7 +15,7 @@ public class ValidationServiceImpl implements ValidationService {
     }
 
     @Override
-    public boolean validatePassword(String password) {
+    public  boolean validatePassword(String password) {
         boolean checkUpper = false;
         boolean checkLower = false;
         boolean checkDigit = false;
@@ -35,5 +37,16 @@ public class ValidationServiceImpl implements ValidationService {
             }
         }
         return (checkSpecial && checkLower && checkDigit && checkUpper);
+    }
+
+    @Override
+    public boolean validateAccountIsExsit(String accName)
+    {
+        for (Account a : ewallet.getAccounts())
+        {
+            if (a.getUserName().equals(accName))
+                return true;
+        }
+        return false;
     }
 }

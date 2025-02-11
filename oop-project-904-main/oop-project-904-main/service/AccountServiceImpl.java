@@ -19,6 +19,7 @@ public class AccountServiceImpl implements AccountService {
 
         List<Account> newAcs = new ArrayList<>();
         if (ewallet.getAccounts().isEmpty()) {
+            account.setActive(true);
             newAcs.add(account);
             ewallet.setAccounts(newAcs);
             return true;
@@ -28,8 +29,10 @@ public class AccountServiceImpl implements AccountService {
                 return false;
         }
 
+        account.setActive(true);
         newAcs.add(account);
         ewallet.setAccounts(newAcs);
+
         return false;
     }
 
@@ -41,6 +44,16 @@ public class AccountServiceImpl implements AccountService {
         for (Account a : ewallet.getAccounts()) {
             if (a.getUserName().equals(account.getUserName()) && a.getPassword().equals(account.getPassword()))
                 return true;
+            if (a.getUserName().equals(account.getUserName()))
+            {
+                System.out.println("Password Not Matched");
+                return false;
+            }
+            else
+            {
+                System.out.println("Account Not Exist");
+                return false;
+            }
         }
         return false;
     }
@@ -55,13 +68,11 @@ public class AccountServiceImpl implements AccountService {
         // TODO check if account is active or not  if not print account not active
         // TODO make deposit
         if (!loginAccount(account)) {
-            System.out.println("account not exist");
             return false;
         }
-        if (!account.getActive()) {
-            System.out.println("account not active");
+        if (!account.getActive())
             return false;
-        }
+
         return true;
 
     }
