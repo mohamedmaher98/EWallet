@@ -1,6 +1,7 @@
-package main.project.service;
+package main.project.ServiceImp;
 
 import main.project.model.Account;
+import main.project.service.ValidationService;
 
 public class ValidationServiceImpl implements ValidationService {
 

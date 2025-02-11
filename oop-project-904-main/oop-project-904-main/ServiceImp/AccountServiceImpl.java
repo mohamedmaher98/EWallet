@@ -1,9 +1,9 @@
-package main.project.service;
+package main.project.ServiceImp;
 
 import main.project.model.Account;
 import main.project.model.Ewallet;
+import main.project.service.AccountService;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,23 +17,20 @@ public class AccountServiceImpl implements AccountService {
         // 6.TODO if not exist any account not has same username add account and return true
         // 7.TODO else return false
 
-        List<Account> newAcs = new ArrayList<>();
-        if (ewallet.getAccounts().isEmpty()) {
+
+            List<Account> accounts = ewallet.getAccounts();
+
+            for (Account acc : accounts) {
+                if (acc.getUserName().equals(account.getUserName())) {
+                    return false;
+                }
+            }
+
             account.setActive(true);
-            newAcs.add(account);
-            ewallet.setAccounts(newAcs);
+            accounts.add(account);
+
             return true;
-        }
-        for (Account acc : ewallet.getAccounts()) {
-            if (acc.getUserName().equals(account.getUserName()))
-                return false;
-        }
 
-        account.setActive(true);
-        newAcs.add(account);
-        ewallet.setAccounts(newAcs);
-
-        return false;
     }
 
     @Override
@@ -44,16 +41,6 @@ public class AccountServiceImpl implements AccountService {
         for (Account a : ewallet.getAccounts()) {
             if (a.getUserName().equals(account.getUserName()) && a.getPassword().equals(account.getPassword()))
                 return true;
-            if (a.getUserName().equals(account.getUserName()))
-            {
-                System.out.println("Password Not Matched");
-                return false;
-            }
-            else
-            {
-                System.out.println("Account Not Exist");
-                return false;
-            }
         }
         return false;
     }
@@ -67,7 +54,8 @@ public class AccountServiceImpl implements AccountService {
         // TODO check if account exist on wallet or not if not print account not exist
         // TODO check if account is active or not  if not print account not active
         // TODO make deposit
-        if (!loginAccount(account)) {
+        ValidationServiceImpl validationService = new ValidationServiceImpl();
+        if (validationService.validateAccountIsExsit(account.getUserName())){
             return false;
         }
         if (!account.getActive())

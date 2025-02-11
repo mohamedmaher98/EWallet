@@ -21,8 +21,7 @@ public class Ewallet {
     public static Ewallet getInstance() {
         if (instance == null)
             return instance = new Ewallet();
-        else
-            return instance;
+        return instance;
     }
 
     public String getName() {
